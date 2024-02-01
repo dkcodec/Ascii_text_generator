@@ -1,6 +1,5 @@
 from telebot import types
 import Ascii_generator
-import pyfiglet
 import telebot
 import key
 
@@ -47,11 +46,13 @@ def show_commands(message):
         markup.add(types.KeyboardButton(command))
     bot.send_message(message.chat.id, "Select command:", reply_markup=markup)
 
-
 @bot.message_handler(content_types=["text"])
 def text_message(message):
 
     mes = message.text
+
+    if font_name == '':
+        font_name = ''
 
     if mes == "/":
         bot.send_message(message.chat.id, 'Take my congrats, you found easter egg ^-^')
