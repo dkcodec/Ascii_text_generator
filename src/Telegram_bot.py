@@ -5,7 +5,7 @@ import key
 
 bot = telebot.TeleBot(key.BOT_TOKEN)
 available_commands = ['/start', '/fonts', '/commands']
-global font_name
+font_name = 'banner'
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -51,12 +51,12 @@ def text_message(message):
 
     mes = message.text
 
-    if font_name == '':
-        font_name = ''
-
     if mes == "/":
         bot.send_message(message.chat.id, 'Take my congrats, you found easter egg ^-^')
     else:
-        bot.send_message(message.chat.id, f'```\n{Ascii_generator.transfer(mes, font_name)}\n```', parse_mode='Markdown')
+        try:
+            bot.send_message(message.chat.id, f'```\n{Ascii_generator.transfer(mes, font_name)}\n```', parse_mode='Markdown')
+        except:
+            bot.send_message(message.chat.id, f'Something went wrong! do not use this(these) symbol(s)',parse_mode='Markdown')
 
 bot.polling(none_stop=True, interval=0)
